@@ -117,7 +117,7 @@ const Home = ({ navigation }) => {
             </Text>
           </Pressable>
 
-          <Pressable onPress={() => navigation.navigate("Profile")}>
+          <Pressable onPress={() => navigation.navigate("AllProducts")}>
             <Image
               source={{
                 uri: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",

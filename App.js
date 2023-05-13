@@ -1,13 +1,15 @@
 import { NavigationContainer } from "@react-navigation/native";
-import { StatusBar } from "expo-status-bar";
-import { SafeAreaView, StyleSheet, Text, View } from "react-native";
+import { StyleSheet } from "react-native";
 import Mainstack from "./src/navigation/MainStack";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <Mainstack />
-    </NavigationContainer>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <NavigationContainer>
+        <Mainstack />
+      </NavigationContainer>
+    </GestureHandlerRootView>
   );
 }
 
