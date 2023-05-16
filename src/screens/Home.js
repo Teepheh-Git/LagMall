@@ -1,8 +1,6 @@
 import {
   SafeAreaView,
   StyleSheet,
-  Text,
-  View,
   Image,
   Pressable,
   TextInput,
@@ -12,6 +10,10 @@ import {
 } from "react-native";
 import React, { useEffect, useRef, useState } from "react";
 import { SimpleLineIcons, Ionicons, EvilIcons } from "@expo/vector-icons";
+
+import { View, Text } from "react-native-animatable";
+
+import { Switch } from "react-native-switch";
 
 const w = Dimensions.get("window").width;
 const adsJson = [
@@ -49,10 +51,11 @@ const adsJson2 = [
 const Home = ({ navigation }) => {
   const [searchText, setSearchText] = useState("");
 
+  const [toggle, setToggle] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const scrollX = useRef(new Animated.Value(0)).current;
-  const slidesRef = useRef(null);
+  // const slidesRef = useRef(null);
 
   const viewableItemsChanged = useRef(({ viewableItems }) => {
     setCurrentIndex(viewableItems[0].index);
@@ -127,9 +130,14 @@ const Home = ({ navigation }) => {
           </Pressable>
         </View>
       </View>
-
       {/* ------------------------------------------------------------------HEADIMG SECTION-------------------------------------------- */}
-      <View style={styles.headSection}>
+      <View
+        style={styles.headSection}
+        animation={"slideInLeft"}
+        duration={2000}
+        useNativeDriver={false}
+        iterationCount={3}
+      >
         <Text
           style={{
             fontSize: 30,
@@ -159,9 +167,7 @@ const Home = ({ navigation }) => {
           />
         </View>
       </View>
-
       {/* ------------------------------------------------------------------ads SECTION-------------------------------------------- */}
-
       <View>
         <FlatList
           data={adsJson}
@@ -195,7 +201,6 @@ const Home = ({ navigation }) => {
           )}
         />
       </View>
-
       <View>
         <FlatList
           data={adsJson2}
@@ -213,7 +218,7 @@ const Home = ({ navigation }) => {
           onViewableItemsChanged={viewableItemsChanged}
           viewabilityConfig={viewConfig}
           scrollEventThrottle={16}
-          ref={slidesRef}
+          // ref={slidesRef}
           // ------------------------------TO HERE------------------------------
           renderItem={({ item, index }) => (
             <View
@@ -270,6 +275,34 @@ const Home = ({ navigation }) => {
             />
           ))}
         </View>
+      </View>
+      <View>
+        <Switch
+          value={toggle}
+          onValueChange={(val) => {
+            setToggle((prev) => !prev);
+          }}
+          disabled={false}
+          activeText={"On"}
+          inActiveText={"Off"}
+          circleSize={30}
+          barHeight={30}
+          circleBorderWidth={3}
+          backgroundActive={"#FFDBD0"}
+          backgroundInactive={"gray"}
+          circleActiveColor={"#E74A03"}
+          circleInActiveColor={"#E74A03"}
+          // renderInsideCircle={() => <CustomComponent />} // custom component to render inside the Switch circle (Text, Image, etc.)
+          changeValueImmediately={true} // if rendering inside circle, change state immediately or wait for animation to complete
+          innerCircleStyle={{ alignItems: "center", justifyContent: "center" }} // style for inner animated circle for what you (may) be rendering inside the circle
+          outerCircleStyle={{}} // style for outer animated circle
+          renderActiveText={false}
+          renderInActiveText={false}
+          switchLeftPx={2} // denominator for logic when sliding to TRUE position. Higher number = more space from RIGHT of the circle to END of the slider
+          switchRightPx={2} // denominator for logic when sliding to FALSE position. Higher number = more space from LEFT of the circle to BEGINNING of the slider
+          switchWidthMultiplier={2} // multiplied by the `circleSize` prop to calculate total width of the Switch
+          switchBorderRadius={30} // Sets the border Radius of the switch slider. If unset, it remains the circleSize.
+        />
       </View>
     </View>
   );

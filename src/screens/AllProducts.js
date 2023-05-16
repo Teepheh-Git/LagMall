@@ -99,7 +99,8 @@ const AllProducts = ({ navigation }) => {
         keyExtractor={(item, index) => index.toString()}
         ListFooterComponent={<View style={{ marginBottom: 200 }} />}
         renderItem={({ item, index }) => (
-          <View
+          <Pressable
+            onPress={() => navigation.navigate("ProductDetails")}
             style={{
               width: w * 0.46,
               height: 300,
@@ -181,7 +182,7 @@ const AllProducts = ({ navigation }) => {
                 </Text>
               </Pressable>
             </View>
-          </View>
+          </Pressable>
         )}
       />
 
