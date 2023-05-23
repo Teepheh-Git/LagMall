@@ -66,7 +66,7 @@ const Home = ({ navigation }) => {
       <SafeAreaView />
       {/* ------------------------------------------------------------------MEN SECTION-------------------------------------------- */}
       <View style={styles.menuSection}>
-        <Pressable>
+        <Pressable onPress={() => navigation.openDrawer()}>
           <SimpleLineIcons name="menu" size={38} color="black" />
         </Pressable>
 
